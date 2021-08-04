@@ -1,9 +1,9 @@
 #INT ROUNDS         1
-#INT START          1
-#CHAR CATEGORY      A
+#INT START          0
+#CHAR CATEGORY      B
 #BOOL DISPLAY       0
 #BOOL FOCUS         0
-#BOOL REVERSE       1
+#BOOL REVERSE       0
 
 %A:
 
@@ -28,6 +28,6 @@ $Bow Exercise                            1 T 10 10 3
 
 %B:
 
-$Lol Exercise            1 F 2 2 2
-$Neko Exercise           1 F 2 2 2
-$Mmm Exercise            1 F 2 2 2
+$Lol Exercise            1 F 1 0 0
+$Neko Exercise           1 F 1 0 0
+$Mmm Exercise            1 F 1 0 0

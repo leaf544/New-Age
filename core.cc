@@ -137,7 +137,7 @@ int main (void) {
     // Outer extensions
 
     compile_extensions("outer_extensions");
-    
+
     if (getch()) {
         FOREGROUND_COLOR(2);
         cout << "Delay (in seconds): ";
@@ -152,11 +152,11 @@ int main (void) {
     if (!std::atoi(FETCH_VARIABLE("REVERSE"))) {
         _start = 0;
     }
-    
+
     /* MAIN LOOP */
     FLOOP (int, r, _rounds) {
         //i = 0, next = i + 1 (1) /// next = (i == Exercises.size() - 1)
-        for (int i = 0 + _start, next = i; i < Exercises.size(); i++, next = i == Exercises.size() - 1 ? next = 0 : next = i + 1){
+        for (int i = 0 + _start, next = i + 1; i < Exercises.size(); i++, next = (i == Exercises.size() - 1 ? next = 0 : next = i + 1)){
             current_exercise = Exercises.begin() + i;
             espeak(current_exercise->name);
 
@@ -180,7 +180,8 @@ int main (void) {
                     }
                     alternate = (!alternate);
                 }
-                cout << "next value: " << next << endl;
+                // cout << "next value: " << next << endl;
+                // cout << "justified?: " << JUSTIFIED(next == (i == Exercises.size() - 1)) << endl;
                 current_reps = 0;
                 system("cls");
                 RESET_COLORS();

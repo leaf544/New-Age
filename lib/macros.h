@@ -19,6 +19,8 @@
 #define FLOOP(t, it, n) for(t it = 0; it < n; it++)
 #define FLOOPS(t, it, v,  n) for(t it = v; it < n; it++)
 
+#define JUSTIFIED(ternary) ((ternary) == true)
+
 #define CSTRING_EQUAL 0
 #define IGNORE 1400
 #define MS 1000

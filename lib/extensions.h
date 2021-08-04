@@ -39,6 +39,10 @@ void reverse_exercises () {
     }
 }
 
+void debug_tools () {
+    cout << "# Debug" << endl;
+}
+
 /* OUTER EXTENSIONS */
 
 void calculate_total_session_time () {
