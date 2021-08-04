@@ -1,0 +1,33 @@
+#INT ROUNDS         1
+#INT START          0
+#CHAR CATEGORY      A
+#BOOL DISPLAY       0
+#BOOL FOCUS         0
+#BOOL REVERSE       1
+
+%A:
+
+//Number of exercises: 11
+
+$Seated Leg Lifts Exercise               1 F 10 15 4
+$Straight Leg Raises Exercise            1 F 20 15 5
+$Knee To Chest Exercise                  1 F 20 15 5
+$Wall Psoas Hold Exercise                1 F 10 20 4
+
+$Single Leg Deadlift Exercise            1 F 15 15 5
+$Raised Leg Bridge Exercise              1 F 10 15 3
+
+$Disc Bridge Exercise                    1 F 10 10 10 
+
+$Lunge Stretch Exercise                  1 F 15 10 5
+$Kneeled Exercise                        1 F 15 10 5 
+
+$Dead Bug Exercise                       1 F 10 15 5
+
+$Bow Exercise                            1 T 10 10 3
+
+%B:
+
+$Lol Exercise            1 F 2 2 2
+$Neko Exercise           1 F 2 2 2
+$Mmm Exercise            1 F 2 2 2

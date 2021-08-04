@@ -1,0 +1,15 @@
+
+/* entry a */
+
+compile_extensions("a");
+
+/* other file */
+
+void focus_mode () {
+     int focus = fetch_variable("focus")->value;
+     if (focus) {
+        // change behaviour of respective entry
+     }
+}
+
+push_extension("main", &focus_mode);
