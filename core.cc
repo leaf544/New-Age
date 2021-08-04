@@ -58,7 +58,7 @@ int main (void) {
     int _start = std::atoi(FETCH_VARIABLE("START"));
     bool _display = std::atoi(FETCH_VARIABLE("DISPLAY"));
     bool _focus = std::atoi(FETCH_VARIABLE("FOCUS"));
-
+    
     std::fseek(file, 0, SEEK_SET);
     
     /* EXERCISE COMPILATION PHASE */
@@ -149,11 +149,14 @@ int main (void) {
     system("cls");
     RESET_COLORS();
 
-        
+    if (!std::atoi(FETCH_VARIABLE("REVERSE"))) {
+        _start = 0;
+    }
+    
     /* MAIN LOOP */
     FLOOP (int, r, _rounds) {
         //i = 0, next = i + 1 (1) /// next = (i == Exercises.size() - 1)
-        for (int i = 0, next = i; i < Exercises.size(); i++, next = i == Exercises.size() - 1 ? next = 0 : next = i + 1){
+        for (int i = 0 + _start, next = i; i < Exercises.size(); i++, next = i == Exercises.size() - 1 ? next = 0 : next = i + 1){
             current_exercise = Exercises.begin() + i;
             espeak(current_exercise->name);
 

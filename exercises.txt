@@ -1,5 +1,5 @@
 #INT ROUNDS         1
-#INT START          0
+#INT START          1
 #CHAR CATEGORY      A
 #BOOL DISPLAY       0
 #BOOL FOCUS         0

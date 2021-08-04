@@ -32,6 +32,7 @@ extern HANDLE hConsole;
 /* AFTER COMPILATION EXTENSIONS */
 
 void reverse_exercises () {
+    // This extension reverses the order of exercises and also provides revese compatibility 
     bool reverse = std::atoi(FETCH_VARIABLE("REVERSE"));
     if (reverse) {
         std::reverse(Exercises.begin(), Exercises.end());
