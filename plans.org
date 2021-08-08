@@ -1,2 +1,2 @@
 * TODO
-  
+  Use a start marker (~) to set the start variable

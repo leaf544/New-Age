@@ -7,8 +7,10 @@
 #include <cstdlib>
 #include <cstring>
 #include <cctype>
+#include <csignal>
 #include <string>
 #include <vector>
+#include <utility>
 #include <conio.h>
 
 /* INCLUDES */
@@ -22,6 +24,7 @@
 std::vector<Exercise> Exercises;
 std::vector<Exercise>::iterator current_exercise;
 std::vector<Variable> Mem;
+std::vector<std::pair<std::string, std::string>> global_changeables;
 std::FILE* file = std::fopen(FILE_PATH, "r");
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -29,11 +32,20 @@ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 extern void craft_message (char*, int, ...);
 extern void espeak (std::string, char speak = 'F');
 extern void gather_variables (void);
+extern std::vector<std::pair<std::string, std::string>>::iterator fetch_variable (std::string);
 extern void display_all_variables (void);
 
 bool is_dig (char);
 void time_out (void);
 void bar (const char* label, int a, int b);
+    
+int _rounds = 0;
+int _start = 0;
+char _category;
+bool _display = false;
+bool _focus = false;
+bool _reverse = false;
+bool _bmode = false;
 
 using std::cout;
 using std::endl;
@@ -41,7 +53,6 @@ using std::endl;
 int main (void) {
 
     /* SETUP  */
-    
     STARTUP_SETUP();
 
     if (file == nullptr) {
@@ -53,11 +64,13 @@ int main (void) {
 
     gather_variables();
     
-    int _rounds = std::atoi(FETCH_VARIABLE("ROUNDS"));
-    char _category = FETCH_VARIABLE("CATEGORY")[0];
-    int _start = std::atoi(FETCH_VARIABLE("START"));
-    bool _display = std::atoi(FETCH_VARIABLE("DISPLAY"));
-    bool _focus = std::atoi(FETCH_VARIABLE("FOCUS"));
+    _rounds = std::atoi(FETCH_VARIABLE("ROUNDS")->value.c_str());
+    _start = std::atoi(FETCH_VARIABLE("START")->value.c_str());
+    _category = FETCH_VARIABLE("CATEGORY")->value[0];
+    _display = std::atoi(FETCH_VARIABLE("DISPLAY")->value.c_str());
+    _focus = std::atoi(FETCH_VARIABLE("FOCUS")->value.c_str());
+    _reverse = std::atoi(FETCH_VARIABLE("REVERSE")->value.c_str());
+    _bmode = std::atoi(FETCH_VARIABLE("BMODE")->value.c_str());
     
     std::fseek(file, 0, SEEK_SET);
     
@@ -87,6 +100,7 @@ int main (void) {
             
             if (ignore != true ) {
                 n_iterations++;
+
                 std::string e_name = s_line.substr(1, s_line.find("  ") - 1);
                 auto pos = std::find_if(s_line.begin(), s_line.end(), is_dig);
                 std::vector<int> values;
@@ -105,7 +119,7 @@ int main (void) {
                             values.push_back((int) token[0]);
                         }
                     }
-                    
+
                     if (n_iterations == _start || n_iterations > _start) {
                         Exercises.push_back(Exercise(e_name, (char) values[1], values[0], values[2], values[3], values[4]));
                         if (_focus) {
@@ -124,9 +138,9 @@ int main (void) {
             break;
         }
     }
-
-    compile_extensions("after_compilation");
     
+    compile_extensions("after_compilation");
+
     FOREGROUND_COLOR(10);
     cout << "Initialization finished, press any key to start" << endl << endl;
     FOREGROUND_COLOR(DEFAULT_FOREGROUND);
@@ -149,13 +163,15 @@ int main (void) {
     system("cls");
     RESET_COLORS();
 
-    if (!std::atoi(FETCH_VARIABLE("REVERSE"))) {
-        _start = 0;
-    }
 
     /* MAIN LOOP */
     FLOOP (int, r, _rounds) {
         //i = 0, next = i + 1 (1) /// next = (i == Exercises.size() - 1)
+
+        if (!std::atoi(FETCH_VARIABLE("REVERSE")->value.c_str())) {
+            _start = 0;
+        }
+        
         for (int i = 0 + _start, next = i + 1; i < Exercises.size(); i++, next = (i == Exercises.size() - 1 ? next = 0 : next = i + 1)){
             current_exercise = Exercises.begin() + i;
             espeak(current_exercise->name);
@@ -175,7 +191,7 @@ int main (void) {
                         espeak(std::to_string(current_reps), current_exercise->freestyle);
                         Sleep(current_exercise->hold * MS);
                     } else {
-                        espeak("Alternate");
+                        espeak("Alternate", current_exercise->freestyle);
                         Sleep(current_exercise->ahold * MS);
                     }
                     alternate = (!alternate);
@@ -196,6 +212,7 @@ int main (void) {
                 time_out();
             }
         }
+        // compile_extensions("round_end");
     }
     
 
@@ -228,4 +245,6 @@ void bar(const char* label, int a, int b) {
     cout << label << sbar << endl;
 }
 
-//g++ core.cc general.cc lib/extensions.h -o core.exe && start core.exe && cls
+
+// g++ core.cc general.cc lib/extensions.h -o core.exe && start core.exe && cls
+

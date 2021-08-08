@@ -18,13 +18,20 @@
 using std::cout;
 using std::endl;
 
-
 #define PUSH_EXTENSION(seg, func) std::pair<std::string, void(*)(void)>(seg, func)
 
 extern std::vector<Variable> Mem;
 extern std::vector<Exercise> Exercises;
 extern std::vector<Exercise>::iterator current_exercise;
 extern HANDLE hConsole;
+
+extern int _rounds;
+extern int _start;
+extern char _category;
+extern bool _display;
+extern bool _focus;
+extern bool _reverse;
+extern bool _bmode;
 
 /* EXTENSIONS */
 
@@ -33,15 +40,23 @@ extern HANDLE hConsole;
 
 void reverse_exercises () {
     // This extension reverses the order of exercises and also provides revese compatibility 
-    bool reverse = std::atoi(FETCH_VARIABLE("REVERSE"));
-    if (reverse) {
+    if (_reverse) {
         std::reverse(Exercises.begin(), Exercises.end());
+    }
+}
+
+void on_bmode () {
+    if (_bmode) {
+        std::vector<Exercise> cpy = Exercises;
+        std::reverse(cpy.begin(), cpy.end());
+        Exercises.insert(Exercises.end(), cpy.begin(), cpy.end());
     }
 }
 
 void debug_tools () {
     cout << "# Debug" << endl;
 }
+
 
 /* OUTER EXTENSIONS */
 
@@ -52,6 +67,7 @@ void calculate_total_session_time () {
     for (auto& exer : Exercises) {
         total_time += exer.CalculateTime();
     }
+    total_time *= _rounds;
     cout << "Total session time: " << total_time << " minutes" << endl << endl;
     RESET_COLORS();
 }
@@ -63,9 +79,19 @@ void describe_all_exercises () {
     }
 }
 
-
 /* ROUNDS END EXTENSIONS */
 
+void reverse_mode_activate () {
+    std::vector<Exercise> temp;
+    //std::copy(Exercises.begin(), Exercises.end(), std::back_inserter(temp));
+    for (auto& val : Exercises) {
+        temp.push_back(val);
+    }
+    std::reverse(Exercises.begin(), Exercises.end());
+    for (auto& val : temp) {
+        Exercises.push_back(val);
+    }
+}
 
 /* ROUNDS BEGIN EXTENSIONS */
 
@@ -74,7 +100,7 @@ void describe_all_exercises () {
 
 void display_exercise_image (void) {
     // This extension displays a visual representation of the current exercise at hand
-    bool display = std::atoi(FETCH_VARIABLE("DISPLAY"));
+    bool display = std::atoi(FETCH_VARIABLE("DISPLAY")->value.c_str());
     if (display) {
         std::string png (current_exercise->name);
         FLOOP(int, fi, png.length()) {
@@ -92,6 +118,8 @@ std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
     PUSH_EXTENSION("exercise_begin", &display_exercise_image),
     PUSH_EXTENSION("outer_extensions", &calculate_total_session_time),
     PUSH_EXTENSION("after_compilation", &reverse_exercises),
+    PUSH_EXTENSION("after_compilation", &on_bmode)
+    // PUSH_EXTENSION("round_end", &reverse_mode_activate),
     // PUSH_EXTENSION("outer_extensions", &describe_all_exercises)
 };
 

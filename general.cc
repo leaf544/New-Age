@@ -6,6 +6,7 @@
 #include <string>
 #include <cstdlib>
 #include <cstring>
+#include <utility>
 
 using std::cout;
 using std::endl;
@@ -23,6 +24,7 @@ using std::endl;
 Variable control_variable;
 extern std::FILE* file;
 extern std::vector<Variable> Mem;
+extern std::vector<std::pair<std::string, std::string>> global_changeables;
 extern bool is_dig (char*);
 
 void craft_message (char* message, int num, ...) {
@@ -112,6 +114,26 @@ void gather_variables () {
             continue;
             break;
         }
+    }
+}
+
+std::vector<std::pair<std::string, std::string>>::iterator
+fetch_variable (std::string name) {
+    auto v = std::find_if(Mem.begin(), Mem.end(), [&](Variable v) {return v.identifier == name;});
+    int vi = v - Mem.begin();
+    global_changeables.push_back(std::pair<std::string, std::string>(std::find_if(Mem.begin(), Mem.end(), [&](Variable v) {return v.identifier == name;})->identifier, std::find_if(Mem.begin(), Mem.end(), [&](Variable v) {return v.identifier == name;})->value));
+    return global_changeables.begin() + vi;
+}
+
+std::string get_variable (std::string name) {
+    for (auto& p : global_changeables) {
+        if (p.first == name) return p.second;
+    }
+}
+
+void setv (std::string iden, int value) {
+    for (auto& p : global_changeables) {
+        if (p.first == iden) p.second = value;
     }
 }
 

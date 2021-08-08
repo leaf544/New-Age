@@ -31,6 +31,6 @@
 #define FOREGROUND_COLOR(c) SetConsoleTextAttribute(hConsole, c);
 #define BACKGROUND_COLOR(c) SetConsoleTextAttribute(hConsole, c);
 #define RESET_COLORS() FOREGROUND_COLOR(DEFAULT_FOREGROUND); 
-#define FETCH_VARIABLE(name) std::find_if(Mem.begin(), Mem.end(), [](Variable v) {return v.identifier == name;})->value.c_str()
+#define FETCH_VARIABLE(name) std::find_if(Mem.begin(), Mem.end(), [](Variable v) {return v.identifier == name;})
 
 #endif

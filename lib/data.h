@@ -17,5 +17,6 @@
 #define VARIABLE_MARKER '#'
 #define CATEGORY_MARKER '%'
 #define EXERCISE_MARKER '$'
+#define START_MARKER '~'
 
 #endif
