@@ -9,7 +9,7 @@
 
 #define DEFAULT_FREESTYLE 'N'
 #define DEFAULT_SETS 1
-#define DEFAULT_REPS 10
+#define DEFAULT_REPS 12
 #define DEFAULT_HOLD 15
 #define DEFAULT_AHOLD 3
 
@@ -18,5 +18,7 @@
 #define CATEGORY_MARKER '%'
 #define EXERCISE_MARKER '$'
 #define START_MARKER '~'
+#define NO_DISPLAY_MARKER '&'
+#define CONTROL_MARKER '@'
 
 #endif

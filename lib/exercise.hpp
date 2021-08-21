@@ -20,7 +20,8 @@ public:
     int reps;
     int hold;
     int ahold;
-
+    std::string tags;
+    
     // Default constructor
     Exercise(std::string n) {
         this->name = n;
@@ -48,6 +49,7 @@ public:
         cout << "# Reps: " << this->reps << endl;
         cout << "# Hold: " << this->hold << "s" << endl;
         cout << "# Ahold: " << this->ahold << "s" << endl;
+        cout << "# Tags: " << this->tags << endl;
         cout << "# Time: " << CalculateTime() << " minute(s)" << endl << endl;
     }
 

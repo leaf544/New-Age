@@ -32,6 +32,7 @@ extern bool _display;
 extern bool _focus;
 extern bool _reverse;
 extern bool _bmode;
+extern bool _dummy;
 
 /* EXTENSIONS */
 
@@ -53,6 +54,17 @@ void on_bmode () {
     }
 }
 
+void on_dummy () {
+    if (_dummy) {
+        for (auto& exer : Exercises) {
+            exer.sets = 1;
+            exer.reps = 1;
+            exer.hold = 0;
+            exer.ahold = 0;
+        }
+    }
+}
+
 void debug_tools () {
     cout << "# Debug" << endl;
 }
@@ -71,6 +83,20 @@ void calculate_total_session_time () {
     cout << "Total session time: " << total_time << " minutes" << endl << endl;
     RESET_COLORS();
 }
+
+
+void calculate_total_session_reps () {
+    // This extension calculates the total amount of time it takes to continue an exercise session
+    FOREGROUND_COLOR(13);
+    long long total_reps = 0;
+    for (auto& exer : Exercises) {
+        total_reps += exer.reps * exer.sets;
+    }
+    total_reps *= _rounds;
+    cout << "Total session reps: " << total_reps <<  endl << endl;
+    RESET_COLORS();
+}
+
 
 void describe_all_exercises () {
     // This extension loops through all class objects of the Exercises vector and invokes their "Describe" method 
@@ -101,7 +127,7 @@ void reverse_mode_activate () {
 void display_exercise_image (void) {
     // This extension displays a visual representation of the current exercise at hand
     bool display = std::atoi(FETCH_VARIABLE("DISPLAY")->value.c_str());
-    if (display) {
+    if (display && current_exercise->tags != "no_display") {
         std::string png (current_exercise->name);
         FLOOP(int, fi, png.length()) {
             if(png[fi] == ' ') png[fi] = '_';
@@ -112,13 +138,16 @@ void display_exercise_image (void) {
     }
 }
 
+
 /* EXERCISE END EXTENSIONS */
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
     PUSH_EXTENSION("exercise_begin", &display_exercise_image),
     PUSH_EXTENSION("outer_extensions", &calculate_total_session_time),
+    PUSH_EXTENSION("outer_extensions", &calculate_total_session_reps),
     PUSH_EXTENSION("after_compilation", &reverse_exercises),
-    PUSH_EXTENSION("after_compilation", &on_bmode)
+    PUSH_EXTENSION("after_compilation", &on_bmode),
+    PUSH_EXTENSION("after_compilation", &on_dummy)
     // PUSH_EXTENSION("round_end", &reverse_mode_activate),
     // PUSH_EXTENSION("outer_extensions", &describe_all_exercises)
 };

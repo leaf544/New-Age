@@ -24,8 +24,6 @@
 #include "lib/data.h"
 #include "lib/extensions.h"
 
-#define MAX_HOLD 100
-
 /* HIGH STATUS VARIABLES */
 std::vector<Exercise> Exercises;
 std::vector<Exercise>::iterator current_exercise;
@@ -92,6 +90,8 @@ int main (void) {
     int holdoffset = std::atoi(FETCH_VARIABLE("HOLDOFFSET")->value.c_str());
     int aholdoffset = std::atoi(FETCH_VARIABLE("AHOLDOFFSET")->value.c_str());
 
+    bool control = std::atoi(FETCH_VARIABLE("CONTROL")->value.c_str());
+    
     std::fseek(file, 0, SEEK_SET);
     
     /* EXERCISE COMPILATION PHASE */
@@ -149,7 +149,6 @@ int main (void) {
                     if (n_iterations == _start || n_iterations > _start) {
                         Exercises.push_back(Exercise(e_name, (char) values[1], values[0] + setsoffset, values[2] + repsoffset, values[3] + holdoffset, values[4] + aholdoffset));
                         Exercises.back().tags = s_line.find(NO_DISPLAY_MARKER) != std::string::npos ? "no_display" : "";
-                        Exercises.back().tags = s_line.find(CONTROL_MARKER) != std::string::npos ? "control" : "";
                         if (_focus) {
                             suicide = true;
                         }
@@ -169,6 +168,9 @@ int main (void) {
     }
     
     compile_extensions("after_compilation");
+
+    int multip = control == true ?  2 : 1;
+    
     
     FOREGROUND_COLOR(10);
     cout << "Initialization finished, press any key to start" << endl;
@@ -215,70 +217,36 @@ int main (void) {
                 /* Sets Loop */
                 Sleep(1 * MS);
                 bool skip = false;
-                int multip = current_exercise->tags == "control" ? 1 : 2;
                 FLOOP (int, r, current_exercise->reps * multip) {
-                    if (current_exercise->tags == "control") {
+                    /* Rounds Loop */
+                    if (!alternate) {
+                        current_reps++;
+                        bar("REPS: ", current_reps, current_exercise->reps);
+                        // espeak(std::to_string(current_reps), current_exercise->freestyle);
+                        espeak("Rep", current_exercise->freestyle);
+                        Sleep(current_exercise->hold * MS);
+                    } else {
+                        espeak("Alternate", current_exercise->freestyle);
+                        // Sleep(current_exercise->ahold * MS);
+                        
                         long long start = time(NULL);
                         long long elapsed = 0;
-                        long long last = 0;
-                        bool block = false;
-                        current_reps++;
-        
-                        while(elapsed < MAX_HOLD) {
-                            if (elapsed >= current_exercise->hold) {
-                                if (!block) {
-                                    bar("SECONDS: ", elapsed, current_exercise->hold);
-                                    espeak("Hold exceeded");
-                                    current_reps++;
-                                    block = true;
-                                }
-                                if (GetAsyncKeyState(VK_UP)) {
-                                    block = false;
-                                    break;
-                                }
+
+                        while(elapsed < current_exercise->ahold) {
+                            if (GetAsyncKeyState(VK_UP)4) {
+                                skip= true;
+                                cout << "Skipping.." << endl;
+                                Sleep(1 * MS);
+                                RESET_COLORS();
+                                system("cls");
+                                break;
                             }
-                            if (elapsed != last) {                    
-                                bar("SECONDS: ", elapsed, current_exercise->hold);
-                                if (block) {
-                                    cout << elapsed - current_exercise->hold << " extra seconds" << endl;                                   
-                                }
-                            }
-                            last = elapsed;
                             elapsed = time(NULL) - start;
                         }
-                        std::system("cls");
-                        Sleep(current_exercise->ahold * MS);
-                    } else {
-                        if (!alternate) {
-                            current_reps++;
-                            bar("REPS: ", current_reps, current_exercise->reps);
-                            // espeak(std::to_string(current_reps), current_exercise->freestyle);
-                            espeak("Rep", current_exercise->freestyle);
-                            Sleep(current_exercise->hold * MS);
-                        } else {
-                            espeak("Alternate", current_exercise->freestyle);
-                            // Sleep(current_exercise->ahold * MS);
                         
-                            long long start = time(NULL);
-                            long long elapsed = 0;
-
-                            while(elapsed < current_exercise->ahold) {
-                                if (GetAsyncKeyState(VK_UP)) {
-                                    skip= true;
-                                    cout << "Skipping.." << endl;
-                                    Sleep(1 * MS);
-                                    RESET_COLORS();
-                                    system("cls");
-                                    break;
-                                }
-                                elapsed = time(NULL) - start;
-                            }
-                        
-                        }
-                        alternate = (!alternate);
-                        if (skip) break;
                     }
-
+                    alternate = (!alternate);
+                    if (skip) break;
                 }
                 if (skip) {
                     skip = false;
