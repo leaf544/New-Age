@@ -197,7 +197,6 @@ int main (void) {
     /* MAIN LOOP */
     FLOOP (int, r, _rounds) {
         //i = 0, next = i + 1 (1) /// next = (i == Exercises.size() - 1)
-
         if (!std::atoi(FETCH_VARIABLE("REVERSE")->value.c_str())) {
             _start = 0;
         }

@@ -138,6 +138,15 @@ void display_exercise_image (void) {
     }
 }
 
+void display_end_results (void) {
+    cout << "# End results" << endl;
+    int total_reps = 0;
+    for (auto& e : Exercises) {
+        total_reps += e.reps;
+    }
+    total_reps *= _rounds;
+    cout << "Total reps: " << total_reps << endl;
+}
 
 /* EXERCISE END EXTENSIONS */
 
@@ -147,7 +156,8 @@ std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
     PUSH_EXTENSION("outer_extensions", &calculate_total_session_reps),
     PUSH_EXTENSION("after_compilation", &reverse_exercises),
     PUSH_EXTENSION("after_compilation", &on_bmode),
-    PUSH_EXTENSION("after_compilation", &on_dummy)
+    PUSH_EXTENSION("after_compilation", &on_dummy),
+    // PUSH_EXTENSION("outer_extensions", &display_end_results)
     // PUSH_EXTENSION("round_end", &reverse_mode_activate),
     // PUSH_EXTENSION("outer_extensions", &describe_all_exercises)
 };
