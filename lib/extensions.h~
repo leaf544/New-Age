@@ -32,7 +32,7 @@ extern bool _display;
 extern bool _focus;
 extern bool _reverse;
 extern bool _bmode;
-extern bool _dummy;
+extern bool _dummy = true;
 
 /* EXTENSIONS */
 

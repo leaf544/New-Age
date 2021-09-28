@@ -4,7 +4,7 @@
 #define DEFAULT_FOREGROUND 7
 
 #define APPLICATION_NAME "New Age"
-#define FILE_PATH "F:\\NewAge\\exercises.newage"
+#define FILE_PATH "F:\\NewAge\\exercises.txt"
 #define FILE_PNGS_PATH "F:\\NewAge\\pngs\\"
 
 #define DEFAULT_FREESTYLE 'N'
