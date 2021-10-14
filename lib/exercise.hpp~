@@ -53,9 +53,9 @@ public:
         cout << "# Time: " << CalculateTime() << " minute(s)" << endl << endl;
     }
     
-    double CalculateTime() {
-        return (this->sets * (this->reps * (this->hold + this->ahold))) / 60.0F;
-        //return ((this->sets * (this->reps * this->hold) + (this->reps * ahold)) / 60);
+    long long CalculateTime() {
+        //return (this->sets * (this->reps * (this->hold + this->ahold)));
+        return ((this->sets * (this->reps * this->hold) + (this->reps * ahold)) / 60);
     }
     
 };

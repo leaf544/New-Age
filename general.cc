@@ -43,7 +43,13 @@ extern int setsoffset;
 extern int repsoffset;
 extern int holdoffset;
 extern int aholdoffset;
-
+extern bool easy;
+extern bool warmup;
+extern bool setall;
+extern int sets;
+extern int reps;
+extern int hold;
+extern int ahold;
 
 void craft_message (char* message, int num, ...) {
     va_list tuple;
@@ -189,4 +195,11 @@ void compile_variables () {
     repsoffset =  WRAP_CONVERT(FETCH_VARIABLE("REPSOFFSET"));
     holdoffset = WRAP_CONVERT(FETCH_VARIABLE("HOLDOFFSET"));
     aholdoffset = WRAP_CONVERT(FETCH_VARIABLE("AHOLDOFFSET"));
+    easy = WRAP_CONVERT(FETCH_VARIABLE("EASY"));
+    warmup = WRAP_CONVERT(FETCH_VARIABLE("WARMUP"));
+    setall = WRAP_CONVERT(FETCH_VARIABLE("SETALL"));
+    sets = WRAP_CONVERT(FETCH_VARIABLE("SETS"));
+    reps = WRAP_CONVERT(FETCH_VARIABLE("REPS"));
+    hold = WRAP_CONVERT(FETCH_VARIABLE("HOLD"));
+    ahold = WRAP_CONVERT(FETCH_VARIABLE("AHOLD"));
 }

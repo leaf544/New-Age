@@ -23,7 +23,3 @@
     // int repsoffset = std::atoi(FETCH_VARIABLE("REPSOFFSET")->value.c_str());
     // int holdoffset = std::atoi(FETCH_VARIABLE("HOLDOFFSET")->value.c_str());
     // int aholdoffset = std::atoi(FETCH_VARIABLE("AHOLDOFFSET")->value.c_str());
-  for (auto& p : Extensions) {
-    if (p.first == group) {p.second();
-    }
-  }

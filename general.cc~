@@ -28,6 +28,7 @@ extern std::vector<std::pair<std::string, std::string>> global_changeables;
 extern bool is_dig (char*);
 
 extern int _rounds;
+extern int _start;
 extern char _category;
 extern bool _display;
 extern bool _focus;
@@ -35,13 +36,14 @@ extern bool _reverse;
 extern bool _bmode;
 extern int _rdelay;
 extern bool _dummy;
+extern bool _use_start;
 extern int _timemode;
 extern int _del;
 extern int setsoffset;
 extern int repsoffset;
-extern int holdsoffset;
+extern int holdoffset;
 extern int aholdoffset;
-
+extern bool easy;
 
 void craft_message (char* message, int num, ...) {
     va_list tuple;
@@ -187,4 +189,5 @@ void compile_variables () {
     repsoffset =  WRAP_CONVERT(FETCH_VARIABLE("REPSOFFSET"));
     holdoffset = WRAP_CONVERT(FETCH_VARIABLE("HOLDOFFSET"));
     aholdoffset = WRAP_CONVERT(FETCH_VARIABLE("AHOLDOFFSET"));
+    easy = WRAP_CONVERT(FETCH_VARIABLE("AHOLDOFFSET"));
 }

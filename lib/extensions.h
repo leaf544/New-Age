@@ -2,6 +2,7 @@
 #define EXTENSIONS_H
 
 #include <iostream>
+#include <iomanip>
 #include <Windows.h>
 #include <algorithm>
 #include <vector>
@@ -33,6 +34,13 @@ extern bool _focus;
 extern bool _reverse;
 extern bool _bmode;
 extern bool _dummy;
+extern bool easy;
+extern bool warmup;
+extern bool setall;
+extern int sets;
+extern int reps;
+extern int hold;
+extern int ahold;
 
 /* EXTENSIONS */
 
@@ -65,8 +73,36 @@ void on_dummy () {
     }
 }
 
+
+void on_easy () {
+    if (easy) {
+        for (auto& exer : Exercises) {
+          exer.reps = 6;
+        }
+    }
+}
+
+void on_warmup () {
+    if (warmup) {
+        for (auto& exer : Exercises) {
+            exer.reps = 4;
+        }
+    }
+}
+
 void debug_tools () {
     cout << "# Debug" << endl;
+}
+
+void on_setall () {
+    if (setall) {
+        for (auto& exer : Exercises) {
+            exer.sets = sets;
+            exer.reps = reps;
+            exer.hold = hold;
+            exer.ahold = ahold;
+        }
+    }
 }
 
 
@@ -75,12 +111,13 @@ void debug_tools () {
 void calculate_total_session_time () {
     // This extension calculates the total amount of time it takes to continue an exercise session
     FOREGROUND_COLOR(13);
-    long long total_time = 0;
-    
+    double total_time = 0.00;
     for (auto& exer : Exercises) {
         total_time += exer.CalculateTime();
     }
     total_time *= _rounds;
+    std::cout << std::fixed;
+    std::cout << std::setprecision(2);
     cout << "Total session time: " << total_time << " minutes" << endl << endl;
     RESET_COLORS();
 }
@@ -151,21 +188,27 @@ void display_end_results (void) {
 /* EXERCISE END EXTENSIONS */
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
+    PUSH_EXTENSION("after_compilation", &on_easy),
     PUSH_EXTENSION("exercise_begin", &display_exercise_image),
     PUSH_EXTENSION("outer_extensions", &calculate_total_session_time),
     PUSH_EXTENSION("outer_extensions", &calculate_total_session_reps),
     PUSH_EXTENSION("after_compilation", &reverse_exercises),
     PUSH_EXTENSION("after_compilation", &on_bmode),
-    PUSH_EXTENSION("after_compilation", &on_dummy)
+    PUSH_EXTENSION("after_compilation", &on_dummy),
+    PUSH_EXTENSION("after_compilation", &on_warmup),
+    PUSH_EXTENSION("after_compilation", &on_setall)
     // PUSH_EXTENSION("outer_extensions", &display_end_results)
     // PUSH_EXTENSION("round_end", &reverse_mode_activate),
     // PUSH_EXTENSION("outer_extensions", &describe_all_exercises)
 };
 
 void compile_extensions (std::string group) {
-    for (auto& p : Extensions) {
-        if (p.first == group) p.second();
+    for (auto& p :Extensions) {
+        if (p.first == group) {
+            p.second();
+            FOREGROUND_COLOR(3);
+        }
     }
 }
-
+  
 #endif

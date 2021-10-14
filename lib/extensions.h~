@@ -32,7 +32,8 @@ extern bool _display;
 extern bool _focus;
 extern bool _reverse;
 extern bool _bmode;
-extern bool _dummy = true;
+extern bool _dummy;
+extern bool easy;
 
 /* EXTENSIONS */
 
@@ -61,6 +62,16 @@ void on_dummy () {
             exer.reps = 1;
             exer.hold = 0;
             exer.ahold = 0;
+        }
+    }
+}
+
+
+void on_easy () {
+    if (easy) {
+        for (auto& exer : Exercises) {
+            exer.reps = 6;
+            cout << exer.reps << endl;
         }
     }
 }
@@ -151,6 +162,7 @@ void display_end_results (void) {
 /* EXERCISE END EXTENSIONS */
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
+    PUSH_EXTENSION("after_compilation", &on_easy),
     PUSH_EXTENSION("exercise_begin", &display_exercise_image),
     PUSH_EXTENSION("outer_extensions", &calculate_total_session_time),
     PUSH_EXTENSION("outer_extensions", &calculate_total_session_reps),
@@ -163,9 +175,13 @@ std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
 };
 
 void compile_extensions (std::string group) {
-    for (auto& p : Extensions) {
-        if (p.first == group) p.second();
+    for (auto& p :Extensions) {
+        if (p.first == group) {
+            p.second();
+            FOREGROUND_COLOR(3);
+            cout << "loaded: " << group << endl;
+        }
     }
 }
-
+  
 #endif
