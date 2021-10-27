@@ -1,0 +1,73 @@
+
+%S:
+
+$Single Leg Deadlift Exercise            1 F 15 20 3
+
+%E:
+
+$Hollow Holds Exercise                   1 F 15 15 3
+$Knee To Chest Exercise                  1 F 15 15 3
+$Single Leg Deadlift Exercise            1 F 15 15 3  
+$Wall Psoas Hold Exercise                1 F 15 20 3
+
+%B:
+
+$Single Leg Deadlift Exercise            1 F 15 15 3
+$Squat Exercise                          1 F 12 12 3
+$Seated Leg Lifts Exercise               1 F 12 10 5
+$Straight Leg Raises Exercise            1 F 12 15 3
+
+$Lunge Stretch Exercise                  1 F 12 17 3 
+$Kneeled Exercise                        1 F 12 17 4
+
+
+
+// [CORE VARIABLES] //
+#INT ROUNDS         1
+#INT START          0
+#CHAR CATEGORY      A
+#BOOL DISPLAY       0
+#BOOL FOCUS         0
+#BOOL REVERSE       0
+// [MISC VARIABLES] //
+#BOOL USESTART      1
+#INT RDELAY         1
+#BOOL BMODE         0
+#BOOL HARDCORE      0
+#BOOL DUMMY         0
+// [CONTROL VARIABLES] //
+#INT REPSOFFSET    0 
+#INT SETSOFFSET    0
+#INT HOLDOFFSET    0
+#INT AHOLDOFFSET   0
+#BOOL TMODE        0
+#BOOL CONTROL      0
+#INT NEXTDELAY     3
+#BOOL EASY         0
+#BOOL WARMUP       0
+
+#BOOL SETALL       0
+      
+#INT SETS          2
+#INT REPS          12
+#INT HOLD          20
+#INT AHOLD         3
+
+%A
+
+$Dead Bug Exercise                       1 F 15 20 3
+// Lower Abdomen (High)
+$Glute Bridge Exercise                   1 F 15 20 3 &
+// Glutes (High), Erector spinae (Med), Hamstrings (Med)
+$Doggy Exercise                          1 F 12 20 3   
+// Glutes (High), Erector spinae
+$Butterfly Exercise                      1 T 15 20 3
+// Hip flexors (Med)
+$Single Leg Deadlift Exercise            1 F 15 20 3
+// Hamstrings (High), Erector spinae (Med)
+$Bow Exercise                            1 T 15 20 3
+// Erector spinae
+$Standing Kneel Exercise                 1 F 15 20 3
+// Quads (High), Glutes (Medium)
+$Lugne Stretch Exercise                  1 F 15 20 3
+// Hip flexors (High)

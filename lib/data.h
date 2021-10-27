@@ -9,8 +9,8 @@
 
 #define DEFAULT_FREESTYLE 'N'
 #define DEFAULT_SETS 1
-#define DEFAULT_REPS 12
-#define DEFAULT_HOLD 15
+#define DEFAULT_REPS 15
+#define DEFAULT_HOLD 20
 #define DEFAULT_AHOLD 3
 
 #define COMMENT_MARKER '/'

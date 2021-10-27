@@ -1,6 +1,5 @@
 #INT ROUNDS     1
 #INT RDELAY     1
-#BOOL DISPLAY   1
 #CHAR CATEGORY  BASE
 
 %BASE
@@ -9,15 +8,20 @@ $Dead_Bug_Exercise                       1 F 15 20 3
 // Lower_Abdomen (High)
 $Glute_Bridge_Exercise                   1 F 15 20 3 &
 // Glutes (High), Erector spinae (Med), Hamstrings (Med)
-$Doggy_Exercise                          1 F 12 20 3   
+$Doggy Exercise                          1 F 12 20 3   
 // Glutes (High), Erector spinae
-$Butterfly_Exercise                      1 T 15 20 3
+$Butterfly Exercise                      1 T 15 20 3
 // Hip flexors (Med)
-$Single_Leg_Deadlift Exercise            1 F 15 20 3
+$Single Leg Deadlift Exercise            1 F 15 20 3
 // Hamstrings (High), Erector spinae (Med)
-$Bow_Exercise                            1 T 15 20 3
+$Bow Exercise                            1 T 15 20 3
 // Erector spinae
-$Standing_Kneel_Exercise                 1 F 15 20 3
+$Standing Kneel Exercise                 1 F 15 20 3
 // Quads (High), Glutes (Medium)
-$Lugne_Stretch_Exercise                  1 F 15 20 3
+$Lugne Stretch Exercise                  1 F 15 20 3
 // Hip flexors (High)
+
+%BITCH
+
+$Nigga_Exercise 1 F 1 1 1
+$Cat_Exercise 1 F 1 1 1 

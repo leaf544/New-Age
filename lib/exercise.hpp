@@ -21,9 +21,13 @@ public:
     int hold;
     int ahold;
     std::string tags;
+
+    // Instantiated constructor
+
+    Exercise () {}
     
-    // Default constructor
-    Exercise(std::string n) {
+    // Semi-default constructor
+    Exercise (std::string n) {
         this->name = n;
         this->freestyle = DEFAULT_FREESTYLE;
         this->sets = DEFAULT_SETS;
@@ -33,7 +37,7 @@ public:
     }
     
     // Constructor with options
-    Exercise(std::string n, char f, int s, int r, int h, int a) {
+    Exercise (std::string n, char f, int s, int r, int h, int a) {
         this->name= n;
         this->freestyle = f;
         this->sets = s;
@@ -42,7 +46,7 @@ public:
         this->ahold = a;
     }
     
-    void Describe() {
+    void Describe () {
         cout << "# Name: " << this->name << endl;
         cout << "# Freestyle: " << this->freestyle << endl;
         cout << "# Sets: " << this->sets << endl;
@@ -53,7 +57,7 @@ public:
         cout << "# Time: " << CalculateTime() << " minute(s)" << endl << endl;
     }
     
-    double CalculateTime() {
+    double CalculateTime () {
         return (this->sets * (this->reps * (this->hold + this->ahold))) / 60.0F;
         //return ((this->sets * (this->reps * this->hold) + (this->reps * ahold)) / 60);
     }

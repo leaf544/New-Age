@@ -1,2 +1,2 @@
-g++ core.cc general.cc lib/extensions.h -o NewAge.exe && start NewAge.exe
+g++ core.cc lib/extensions.h -o NewAge.exe && start NewAge.exe
 pause

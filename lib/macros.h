@@ -16,6 +16,8 @@
     }                     \
 }
 
+#define CLEAR() system("cls");
+
 #define FLOOP(t, it, n) for(t it = 0; it < n; it++)
 #define FLOOPS(t, it, v,  n) for(t it = v; it < n; it++)
 
@@ -33,5 +35,7 @@
 #define RESET_COLORS() FOREGROUND_COLOR(DEFAULT_FOREGROUND);
 #define WRAP_CONVERT(o) std::atoi(o->value.c_str());
 #define FETCH_VARIABLE(name) std::find_if(Mem.begin(), Mem.end(), [](Variable v) {return v.identifier == name;})
+
+#define Log(msg, c) FOREGROUND_COLOR(c); cout << msg << endl; RESET_COLORS();
 
 #endif
