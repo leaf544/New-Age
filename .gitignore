@@ -1,4 +1,3 @@
-NewAge.exe
 main_exec.exe
 /saves/
 saves.cc
@@ -11,6 +10,7 @@ ex.newage
 plans.org
 main.org
 model.org
+all.h
 /tests/
 /pngs/
 /lib/old_extensions.h
