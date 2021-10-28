@@ -1,2 +1,16 @@
 NewAge.exe
-/tests/main_exec.exe
+main_exec.exe
+/saves/
+saves.cc
+saves.newage
+saves.txt
+split.h
+thinking.txt
+va_list.cpp
+ex.newage
+plans.org
+main.org
+model.org
+/tests/
+/pngs/
+/lib/old_extensions.h

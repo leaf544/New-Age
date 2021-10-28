@@ -4,8 +4,8 @@
 #define DEFAULT_FOREGROUND 7
 
 #define APPLICATION_NAME "New Age"
-#define FILE_PATH "F:\\NewAge\\exercises.newage"
-#define FILE_PNGS_PATH "F:\\NewAge\\pngs\\"
+#define FILE_PATH "F:\\NewAge\\exercises.newage" // PUT THE PATH TO YOUR .newage FILE INBETWEEN THESE QUOATION MARKS
+#define FILE_PNGS_PATH "F:\\NewAge\\pngs\\" // PUT THE PATH TO YOUR PNG FOLDER INBETWEEN THESE QUOATION MARKS
 
 #define DEFAULT_FREESTYLE 'N'
 #define DEFAULT_SETS 1
@@ -17,8 +17,8 @@
 #define VARIABLE_MARKER '#'
 #define CATEGORY_MARKER '%'
 #define EXERCISE_MARKER '$'
-#define START_MARKER '~'
-#define NO_DISPLAY_MARKER '&'
-#define CONTROL_MARKER '@'
+#define START_MARKER '~' // FEATURE NO LONGER IN USE
+#define NO_DISPLAY_MARKER '&' // FEATURE NO LONGER IN USE
+#define CONTROL_MARKER '@' // FEATURE NO LONGER IN USE
 
 #endif
