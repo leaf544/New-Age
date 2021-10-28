@@ -77,12 +77,16 @@ int main (void) {
         }
     }
 
+    /* POST COMPILATION */
+
+    compile_extensions("post_compilation");
+    
     /* START SCREEN */
 
     compile_extensions("post_start_screen");
     RESET_COLORS();
-    cout << endl;
-    Exercises.front().Describe();
+    //cout << endl;
+    cout << Exercises.front().name << ", " << Exercises.front().sets << ", " << Exercises.front().freestyle << ", " << Exercises.front().reps << ", " << Exercises.front().hold << ", " << Exercises.front().ahold << endl;
     ON_KEY_CLS();
     
     /* MAIN LOOP */
@@ -91,9 +95,9 @@ int main (void) {
     reader.attatch(&Exercises);
     
     bool finished = false;
-    current_exercise = reader.at(0);
     
     FLOOP (int, ROUNDS, atoi(FetchValue("ROUNDS").c_str())) {
+        current_exercise = reader.at(atoi(FetchValue("START").c_str()));
         while (not finished) {
 
             /* Begin Exercise Block */
@@ -113,7 +117,7 @@ int main (void) {
                         bar("REPS: ", current_reps, current_exercise->reps);
                         current_reps++;
                         UTIL::espeak(std::to_string(current_reps), current_exercise->freestyle);
-                        SLEEP_TIME_FUNCTION(current_exercise->ahold, if (GetAsyncKeyState(VK_RIGHT)){
+                        SLEEP_TIME_FUNCTION(current_exercise->hold, if (GetAsyncKeyState(VK_RIGHT)){
                                 Log("Skipping..", 4);
                                 skipped = true;
                                 break;
@@ -121,7 +125,7 @@ int main (void) {
                         
                         if (skipped) break;
                     } else {
-                        UTIL::espeak("Alternate");
+                        UTIL::espeak("Alternate", current_exercise->freestyle);
                         bar("REPS: ", current_reps, current_exercise->reps);
                         SLEEP_TIME_FUNCTION(current_exercise->ahold, if (GetAsyncKeyState(VK_RIGHT)){
                                 Log("Skipping..", 4);

@@ -37,6 +37,12 @@ extern HANDLE hConsole;
 
 extern std::string FetchValue (std::string);
 
+/* POST COMPILATION EXTENSIONS */
+
+void handle_start () {
+    Exercises.erase(Exercises.begin(), Exercises.end() - (Exercises.size() - atoi(FetchValue("START").c_str())));
+}
+
 /* POST START SCREEN EXTENSIONS */
 
 void calculate_total_session_time () {
@@ -89,6 +95,7 @@ void display_exercise_image () {
 
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
+    PUSH_EXTENSION("post_compilation", &handle_start),
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_time),
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_reps),
     PUSH_EXTENSION("post_start_screen", &n_exercises),
