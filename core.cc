@@ -31,6 +31,7 @@ void bar (const char* label, int a, int b);
 
 using std::cout;
 using std::endl;
+using std::cin;
 
 class Reader {
 public:
@@ -79,7 +80,9 @@ int main (void) {
     /* START SCREEN */
 
     compile_extensions("post_start_screen");
-    //cout << endl;
+    RESET_COLORS();
+    cout << endl;
+    Exercises.front().Describe();
     ON_KEY_CLS();
     
     /* MAIN LOOP */
@@ -101,6 +104,7 @@ int main (void) {
             FLOOP (int, SETS, current_exercise->sets) {
                 /* Begin Sets Block */
                 bool alternate = false;
+                bool skipped = false;
                 int  current_reps = 0;
                 Sleep(atoi(FetchValue("RDELAY").c_str()) * MS);
                 /* End Sets Block */
@@ -109,11 +113,23 @@ int main (void) {
                         bar("REPS: ", current_reps, current_exercise->reps);
                         current_reps++;
                         UTIL::espeak(std::to_string(current_reps), current_exercise->freestyle);
-                        Sleep(current_exercise->hold * MS);
+                        SLEEP_TIME_FUNCTION(current_exercise->ahold, if (GetAsyncKeyState(VK_RIGHT)){
+                                Log("Skipping..", 4);
+                                skipped = true;
+                                break;
+                            });
+                        
+                        if (skipped) break;
                     } else {
                         UTIL::espeak("Alternate");
                         bar("REPS: ", current_reps, current_exercise->reps);
-                        Sleep(current_exercise->ahold * MS);
+                        SLEEP_TIME_FUNCTION(current_exercise->ahold, if (GetAsyncKeyState(VK_RIGHT)){
+                                Log("Skipping..", 4);
+                                skipped = true;
+                                break;
+                            });
+                        
+                        if (skipped) break;
                     }
                     alternate = (!alternate);
                 }
@@ -138,7 +154,7 @@ int main (void) {
 
     UTIL::espeak("Enjoy the feast!");
     
-    std::cin.get();
+    cin.get();
     return 0;
 }
 

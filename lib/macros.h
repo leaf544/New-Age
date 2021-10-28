@@ -10,13 +10,23 @@
     std::exit(1);   \
 }
 
-#define ON_KEY_CLS() { \
-    if (getch()) {      \
-        system("cls");   \
-    }                     \
-}
-
 #define CLEAR() system("cls");
+
+#define ON_KEY_CLS() {                          \
+        cin.get();                              \
+        CLEAR();                                \
+    }                                               
+
+#define SLEEP_TIME_FUNCTION(t, body) {          \
+        int start = time(NULL);                 \
+        int elapsed = 0;                        \
+        while (elapsed < t) {                   \
+            body;                               \
+            elapsed = time(NULL) - start;       \
+        }                                       \
+    }
+
+
 
 #define FLOOP(t, it, n) for(t it = 0; it < n; it++)
 #define FLOOPS(t, it, v,  n) for(t it = v; it < n; it++)

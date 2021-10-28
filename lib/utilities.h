@@ -3,11 +3,17 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <functional>
 
 /* C */
+#include <Windows.h>
+#include <time.h>
 #include <stdlib.h>
 #include <string.h> // strtok(), strcat()
 
+
+using std::cout;
+using std::endl;
 
 #ifndef UTIL_H
 #define UTIL_H
@@ -32,7 +38,6 @@ namespace UTIL {
             system(system_command);
         }
     }
-    
 }
 
 

@@ -1,6 +1,5 @@
 #INT ROUNDS     1
 #INT RDELAY     1
-#BOOL DISPLAY   1
 #CHAR CATEGORY  BASE
 
 %BASE
@@ -21,3 +20,7 @@ $Standing_Kneel_Exercise                 1 F 15 20 3
 // Quads (High), Glutes (Medium)
 $Lugne_Stretch_Exercise                  1 F 15 20 3
 // Hip flexors (High)
+
+%META
+
+$Stanky_Exercise    1 F 1 1 3
