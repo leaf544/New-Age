@@ -5,3 +5,10 @@
 ██║╚████║██╔══╝░░░░████╔═████║░  ██╔══██║██║░░╚██╗██╔══╝░░
 ██║░╚███║███████╗░░╚██╔╝░╚██╔╝░  ██║░░██║╚██████╔╝███████╗
 ╚═╝░░╚══╝╚══════╝░░░╚═╝░░░╚═╝░░  ╚═╝░░╚═╝░╚═════╝░╚══════╝
+
+
+Written by leaf544 aka grandma
+
+Primitive exercise tool, mainly for muscle strengthening and
+corrective exercise
+

@@ -1,9 +1,10 @@
 #INT ROUNDS     1
 #INT START      0
 #INT RDELAY     2
-#CHAR CATEGORY  BASE
+#BOOL REVERSE   1
+#CHAR CATEGORY  MAIN
 
-%BASE
+%MAIN
 
 $Dead_Bug_Exercise                       1 F 15 20 3
 // Lower_Abdomen (High)
@@ -20,7 +21,7 @@ $Standing_Kneel_Exercise                 1 F 15 20 3
 $Lugne_Stretch_Exercise                  1 F 15 20 3
 // Hip flexors (High)
 
-
 %META
 
 $Stanky_Exercise    1 F 1 1 3
+

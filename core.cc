@@ -27,6 +27,7 @@ std::map<std::string, std::string> Variables;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 std::string FetchValue (std::string);
+int FetchValueInt (std::string);
 void bar (const char* label, int a, int b);
 
 using std::cout;
@@ -77,6 +78,12 @@ int main (void) {
         }
     }
 
+    if (Exercises.size() == 0) {
+        Log("No exercises were registered", 8);
+        ON_KEY_CLS();
+        return 0;
+    }
+    
     /* POST COMPILATION */
 
     compile_extensions("post_compilation");
@@ -86,7 +93,7 @@ int main (void) {
     compile_extensions("post_start_screen");
     RESET_COLORS();
     //cout << endl;
-    cout << Exercises.front().name << ", " << Exercises.front().sets << ", " << Exercises.front().freestyle << ", " << Exercises.front().reps << ", " << Exercises.front().hold << ", " << Exercises.front().ahold << endl;
+    (Exercises.begin() + FetchValueInt("START"))->Describe2();
     ON_KEY_CLS();
     
     /* MAIN LOOP */
@@ -96,8 +103,8 @@ int main (void) {
     
     bool finished = false;
     
-    FLOOP (int, ROUNDS, atoi(FetchValue("ROUNDS").c_str())) {
-        current_exercise = reader.at(atoi(FetchValue("START").c_str()));
+    FLOOP (int, ROUNDS, FetchValueInt("ROUNDS")) {
+        current_exercise = reader.at(FetchValueInt("START"));
         while (not finished) {
 
             /* Begin Exercise Block */
@@ -110,7 +117,7 @@ int main (void) {
                 bool alternate = false;
                 bool skipped = false;
                 int  current_reps = 0;
-                Sleep(atoi(FetchValue("RDELAY").c_str()) * MS);
+                Sleep(FetchValueInt("RDELAY") * MS);
                 /* End Sets Block */
                 FLOOP (int, REPS, current_exercise->reps * 2) {
                     if (not alternate) {
@@ -164,6 +171,10 @@ int main (void) {
 
 std::string FetchValue (std::string iden) {
      return Variables[iden] != "" ? Variables[iden] : "0";
+}
+
+int FetchValueInt (std::string iden) {
+    return atoi(FetchValue(iden).c_str());
 }
 
 void bar(const char* label, int a, int b) {

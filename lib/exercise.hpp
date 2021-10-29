@@ -56,6 +56,10 @@ public:
         cout << "# Tags: " << this->tags << endl;
         cout << "# Time: " << CalculateTime() << " minute(s)" << endl << endl;
     }
+
+    void Describe2 () {
+        cout << this->name << ", " << this->freestyle << ", " << this->sets << ", " << this->reps << ", " << this->hold << ", " << this->ahold << endl;
+    }
     
     double CalculateTime () {
         return (this->sets * (this->reps * (this->hold + this->ahold))) / 60.0F;
