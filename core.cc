@@ -90,11 +90,12 @@ int main (void) {
             //cout << category << endl;
             values = UTIL::split_string(line.substr(1, line.length()), " ");
             Exercise instance (values[0]);
-            instance.sets = atoi(values[1].c_str());
+            //cout << DETERMINE_VALUE("SETS_OFFSET", FetchValueInt);
+            instance.sets = atoi(values[1].c_str()) + (DETERMINE_VALUE("SETS_OFFSET", FetchValueInt));
             instance.freestyle = values[2][0];
-            instance.reps = atoi(values[3].c_str());
-            instance.hold = atoi(values[4].c_str());
-            instance.ahold = atoi(values[5].c_str());
+            instance.reps = atoi(values[3].c_str()); + (DETERMINE_VALUE("REPS_OFFSET", FetchValueInt));
+            instance.hold = atoi(values[4].c_str()); + (DETERMINE_VALUE("HOLD_OFFSET", FetchValueInt));
+            instance.ahold = atoi(values[5].c_str()); + (DETERMINE_VALUE("AHOLD_OFFSET", FetchValueInt)); 
             Exercises.push_back(instance);
             values.clear();
         }

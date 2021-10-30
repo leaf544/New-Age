@@ -1,7 +1,7 @@
-#INT ROUNDS     1
-#INT START      0
-#BOOL REVERSE   0
-#INT RDELAY     2
+#INT ROUNDS         1
+#INT START          0
+#BOOL REVERSE       0
+#INT RDELAY         2
 #CHAR CATEGORY  MAIN
 
 // A Category
