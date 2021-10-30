@@ -100,7 +100,7 @@ int main (void) {
         }
     }
 
-    living_category.ListVariables();
+    // living_category.ListVariables();
     
     if (Exercises.size() == 0) {
         Log("No exercises were registered", 8);
