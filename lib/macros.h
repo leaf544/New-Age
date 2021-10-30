@@ -31,8 +31,6 @@
 #define FLOOP(t, it, n) for(t it = 0; it < n; it++)
 #define FLOOPS(t, it, v,  n) for(t it = v; it < n; it++)
 
-#define JUSTIFIED(ternary) ((ternary) == true)
-
 #define CSTRING_EQUAL 0
 #define IGNORE 1400
 #define MS 1000
@@ -43,8 +41,7 @@
 #define FOREGROUND_COLOR(c) SetConsoleTextAttribute(hConsole, c);
 #define BACKGROUND_COLOR(c) SetConsoleTextAttribute(hConsole, c);
 #define RESET_COLORS() FOREGROUND_COLOR(DEFAULT_FOREGROUND);
-#define WRAP_CONVERT(o) std::atoi(o->value.c_str());
-#define FETCH_VARIABLE(name) std::find_if(Mem.begin(), Mem.end(), [](Variable v) {return v.identifier == name;})
+#define DETERMINE_VALUE(val, f) living_category.hasVariables ? living_category.f(val) == 0 ? f(val) : living_category.f(val): f(val)
 
 #define Log(msg, c) FOREGROUND_COLOR(c); cout << msg << endl; RESET_COLORS();
 

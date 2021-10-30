@@ -14,6 +14,7 @@
 #include "lib/utilities.h"
 #include "lib/exercise.hpp"
 #include "lib/extensions.h"
+#include "lib/category.hpp"
 
 /* C */
 #include <Windows.h> 
@@ -23,6 +24,7 @@
 
 std::vector<Exercise> Exercises;
 Exercise* current_exercise = NULL;
+Category living_category;
 std::map<std::string, std::string> Variables;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -46,7 +48,6 @@ public:
     void regress () {this->i--;}
 };
 
-
 int main (void) {
     
     /* SETUP & PREREQUISITES */
@@ -57,17 +58,37 @@ int main (void) {
 
     std::ifstream file(FILE_PATH);
     std::string category = "";
+    std::vector<std::string> values;
+
+    /* PRE COMPILATION */
     
     for (std::string line; std::getline(file, line);) {
         if (line[0] == VARIABLE_MARKER) {
-            auto values = UTIL::split_string(line.substr(1, line.length()), " ");
+            values = UTIL::split_string(line.substr(1, line.length()), " ");
             Variables[values[1]] = values[2];
+            values.clear();
         }
         if (line[0] == '%') {
-            category = line.substr(1, line.length());
+            /* Category Block Begin */
+            values = UTIL::split_string(line.substr(1, line.length()), " ");
+            category = values[0];
+
+            if (category == FetchValue("CATEGORY") and values.size() > 1) {
+                living_category.hasVariables = true; // IMPORTANT
+                values.erase(values.begin());
+                auto tmp = values;
+                int p = 1;
+                FLOOP (int, n, tmp.size() / 3) {
+                    living_category.Variables[tmp[p]] = tmp[p+1];
+                    p += 3;
+                }
+            }
+            
+            /* Category Block End */
         }
         if (line[0] == EXERCISE_MARKER and category == Variables["CATEGORY"]) {
-            auto values = UTIL::split_string(line.substr(1, line.length()), " ");
+            //cout << category << endl;
+            values = UTIL::split_string(line.substr(1, line.length()), " ");
             Exercise instance (values[0]);
             instance.sets = atoi(values[1].c_str());
             instance.freestyle = values[2][0];
@@ -75,9 +96,12 @@ int main (void) {
             instance.hold = atoi(values[4].c_str());
             instance.ahold = atoi(values[5].c_str());
             Exercises.push_back(instance);
+            values.clear();
         }
     }
 
+    living_category.ListVariables();
+    
     if (Exercises.size() == 0) {
         Log("No exercises were registered", 8);
         ON_KEY_CLS();
@@ -103,7 +127,7 @@ int main (void) {
     
     bool finished = false;
     
-    FLOOP (int, ROUNDS, FetchValueInt("ROUNDS")) {
+    FLOOP (int, ROUNDS, DETERMINE_VALUE("ROUNDS", FetchValueInt)) {
         current_exercise = reader.at(0);
         while (not finished) {
 
@@ -117,7 +141,7 @@ int main (void) {
                 bool alternate = false;
                 bool skipped = false;
                 int  current_reps = 0;
-                Sleep(FetchValueInt("RDELAY") * MS);
+                Sleep((DETERMINE_VALUE("RDELAY", FetchValueInt)) * MS);
                 /* End Sets Block */
                 FLOOP (int, REPS, current_exercise->reps * 2) {
                     if (not alternate) {
@@ -170,7 +194,7 @@ int main (void) {
 }
 
 std::string FetchValue (std::string iden) {
-     return Variables[iden] != "" ? Variables[iden] : "0";
+    return Variables[iden] != "" ? Variables[iden] : "0";
 }
 
 int FetchValueInt (std::string iden) {

@@ -18,6 +18,7 @@
 #include "data.h"
 #include "utilities.h"
 #include "exercise.hpp"
+#include "category.hpp"
 
 /* C */
 #include <Windows.h> 
@@ -34,6 +35,7 @@ using std::endl;
 extern std::vector<Exercise> Exercises;
 extern Exercise* current_exercise;
 extern std::map<std::string, std::string> Variables;
+extern Category living_category;
 extern HANDLE hConsole;
 
 extern std::string FetchValue (std::string);
@@ -42,9 +44,17 @@ extern int FetchValueInt (std::string);
 /* POST COMPILATION EXTENSIONS */
 
 void reverse_exercises () {
-    if (FetchValueInt("REVERSE") == 1) {
+
+    if (DETERMINE_VALUE("REVERSE", FetchValueInt)) {
         std::reverse(Exercises.begin(), Exercises.end());
     }
+    
+//     if (living_category.FetchValueInt("REVERSE")) {
+//         std::reverse(Exercises.begin(), Exercises.end());
+//     }
+//     // if (DETERMINE_VALUE("REVERSE", FetchValueInt)) {
+//     //     std::reverse(Exercises.begin(), Exercises.end());
+//     // }
 }
 
 void handle_start () {
@@ -93,7 +103,12 @@ void display_info () {
 
 void display_exercise_image () {
     // This extension displays a visual representation of the current exercise at hand
-    if (atoi(FetchValue("DISPLAY").c_str())) {
+    if (FetchValueInt("DISPLAY") and not living_category.hasVariables) {
+        std::string png (current_exercise->name);
+        png.append(".png");
+        std::string cmd = "start " + std::string(FILE_PNGS_PATH) + std::string(png) + " && timeout 4 && taskkill /IM Microsoft.Photos.exe /F";
+        system(cmd.c_str());
+    } else if (living_category.hasVariables and living_category.FetchValueInt("DISPLAY")) {
         std::string png (current_exercise->name);
         png.append(".png");
         std::string cmd = "start " + std::string(FILE_PNGS_PATH) + std::string(png) + " && timeout 4 && taskkill /IM Microsoft.Photos.exe /F";
