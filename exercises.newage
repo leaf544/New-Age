@@ -1,25 +1,40 @@
 #INT ROUNDS     1
 #INT START      0
+#BOOL REVERSE   0
 #INT RDELAY     2
-#BOOL REVERSE   1
-#CHAR CATEGORY  MAIN
+#CHAR CATEGORY  A
 
-%MAIN
+// A Category
+ -Lower abs: 1
+ -Hamstrings: 3
+ -Glutes: 2 
+ -Hip flexors: 3
+ -Erector spinae: 3
+ -Quads: 1
+ 
+%A
 
 $Dead_Bug_Exercise                       1 F 15 20 3
-// Lower_Abdomen (High)
-$Glute_Bridge_Exercise                   1 F 15 20 3 &
-// Glutes (High), Erector spinae (Med), Hamstrings (Med)
-$Doggy_Exercise                          1 F 12 15 3   
-// Glutes (High), Erector spinae
-$Butterfly_Exercise                      1 T 15 20 3
+// Lower Abdomen (High)
+$Glute_Bridge_Exercise                   1 F 15 20 3
+// Glutes (High), Erector spinae (Med), Hamstrings (Med), Hip flexors (?)
+$Butterfly_Exercise                      1 T 12 20 3
 // Hip flexors (Med)
 $Single_Leg_Deadlift_Exercise            1 F 15 20 3
 // Hamstrings (High), Erector spinae (Med)
-$Standing_Kneel_Exercise                 1 F 15 20 3
-// Quads (High), Glutes (Medium)
-$Lugne_Stretch_Exercise                  1 F 15 20 3
+$Superman_Exercise                       1 F 10 15 3
+// Erector spinae (High)
+$Squat_Exercise                           1 T 100 20 3
+// Glutes (?), Quads (Med), Hamstrings (High), Hip flexors (?)
+
+%B
+
+$Hollow_Holds_Exercise                    1 F 10 20 3
+// Lower Abdomen (High)
+$Wall_Psoas_Hold_Exercise                 1 F 15 25 3
 // Hip flexors (High)
+$Squat_Exercise                           1 T 100    20 3
+// Glutes (?), Quads (Med), Hamstrings (High), Hip flexors (?)
 
 %META
 

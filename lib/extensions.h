@@ -22,6 +22,7 @@
 /* C */
 #include <Windows.h> 
 #include <stdlib.h>
+#include <math.h>
 #include <conio.h>
 #include <string.h>
 
@@ -40,14 +41,14 @@ extern int FetchValueInt (std::string);
 
 /* POST COMPILATION EXTENSIONS */
 
-void handle_start () {
-    Exercises.erase(Exercises.begin(), Exercises.end() - (Exercises.size() - FetchValueInt("START")));
-}
-
 void reverse_exercises () {
-    if (FetchValueInt("REVERSE")) {
+    if (FetchValueInt("REVERSE") == 1) {
         std::reverse(Exercises.begin(), Exercises.end());
     }
+}
+
+void handle_start () {
+    Exercises.erase(Exercises.begin(), Exercises.begin() + FetchValueInt("START"));
 }
 
 /* POST START SCREEN EXTENSIONS */
@@ -102,8 +103,8 @@ void display_exercise_image () {
 
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
-    PUSH_EXTENSION("post_compilation", &handle_start),
     PUSH_EXTENSION("post_compilation", &reverse_exercises),
+    PUSH_EXTENSION("post_compilation", &handle_start),
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_time),
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_reps),
     PUSH_EXTENSION("post_start_screen", &n_exercises),

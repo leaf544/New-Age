@@ -93,7 +93,7 @@ int main (void) {
     compile_extensions("post_start_screen");
     RESET_COLORS();
     //cout << endl;
-    (Exercises.begin() + FetchValueInt("START"))->Describe2();
+    (Exercises.begin())->Describe2();
     ON_KEY_CLS();
     
     /* MAIN LOOP */
@@ -104,7 +104,7 @@ int main (void) {
     bool finished = false;
     
     FLOOP (int, ROUNDS, FetchValueInt("ROUNDS")) {
-        current_exercise = reader.at(FetchValueInt("START"));
+        current_exercise = reader.at(0);
         while (not finished) {
 
             /* Begin Exercise Block */
