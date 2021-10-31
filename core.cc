@@ -127,9 +127,12 @@ int main (void) {
     reader.attatch(&Exercises);
     
     bool finished = false;
-
+    
     FLOOP (int, ROUNDS, (DETERMINE_VALUE("ROUNDS", FetchValueInt))) {
+        reader.set(0);
         current_exercise = reader.at(0);
+        reader.attatch(&Exercises);
+        
         while (not finished) {
             
             /* Begin Exercise Block */

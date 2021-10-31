@@ -125,7 +125,7 @@ void display_exercise_image () {
 
 void multi_round_session () {
     if ((DETERMINE_VALUE("ROUNDS", FetchValueInt)) > 1) {
-        reverse_exercises();
+        std::reverse(Exercises.begin(), Exercises.end());
     }
 }
 
