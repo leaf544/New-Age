@@ -1,8 +1,8 @@
-#INT ROUNDS         1
+#INT ROUNDS         2
 #INT START          0
 #BOOL REVERSE       0
-#INT RDELAY         2
-#CHAR CATEGORY  MAIN
+#INT RDELAY         0
+#CHAR CATEGORY  M
 
 // A Category
  -Lower abs: 1
@@ -12,7 +12,7 @@
  -Erector spinae: 3
  -Quads: 1
  
-%MAIN
+%MAIN #INT ROUNDS 2
 
 $Dead_Bug_Exercise                       1 F 15 20 3
 // Lower Abdomen (High)
@@ -34,9 +34,7 @@ $Wall_Psoas_Hold_Exercise                 1 F 15 25 3
 $Squat_Exercise                           1 T 100    20 3
 // Glutes (?), Quads (Med), Hamstrings (High), Hip flexors (?)
 
-// %MINI
+%M
 
-// $Superman_Exercise                       1 F 10 10 3
-// // Erector spinae (High)
-// $Single_Leg_Deadlift_Exercise            1 F 15 20 3
-// // Hamstrings (High), Erector spinae (Med)
+$Nigga_Exercise 1 F 1 1 1
+$Bitch_Exercise 1 F 1 1 1

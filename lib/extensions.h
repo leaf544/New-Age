@@ -44,17 +44,9 @@ extern int FetchValueInt (std::string);
 /* POST COMPILATION EXTENSIONS */
 
 void reverse_exercises () {
-
     if (DETERMINE_VALUE("REVERSE", FetchValueInt)) {
         std::reverse(Exercises.begin(), Exercises.end());
     }
-    
-//     if (living_category.FetchValueInt("REVERSE")) {
-//         std::reverse(Exercises.begin(), Exercises.end());
-//     }
-//     // if (DETERMINE_VALUE("REVERSE", FetchValueInt)) {
-//     //     std::reverse(Exercises.begin(), Exercises.end());
-//     // }
 }
 
 void handle_start () {
@@ -70,7 +62,7 @@ void calculate_total_session_time () {
     for (auto& exer : Exercises) {
         total_time += exer.CalculateTime();
     }
-    total_time *= atoi(FetchValue("ROUNDS").c_str());
+    total_time *= DETERMINE_VALUE("ROUNDS", FetchValueInt);
     std::cout << std::fixed;
     std::cout << std::setprecision(2);
     cout << "T: " << total_time << " minutes" << endl;
@@ -84,7 +76,7 @@ void calculate_total_session_reps () {
     for (auto& exer : Exercises) {
         total_reps += exer.reps * exer.sets;
     }
-    total_reps *= atoi(FetchValue("ROUNDS").c_str());
+    total_reps *= (DETERMINE_VALUE("ROUNDS", FetchValueInt));
     cout << "R: " << total_reps <<  endl;
     RESET_COLORS();
 }
@@ -93,6 +85,19 @@ void n_exercises () {
     FOREGROUND_COLOR(8);
     cout << "N: " << Exercises.size() << endl;
     RESET_COLORS();
+}
+
+void display_variables () {
+    int colors = 0;
+    RESET_COLORS(); // Just in case, evaluate later
+    for (auto it = Variables.begin(); it != Variables.end(); it++) {
+        if (it->second != "") {
+            FOREGROUND_COLOR(colors);
+            cout << it->first << ": " << it->second << endl;
+            colors++;
+        } 
+    }
+    RESET_COLORS(); // Just in case, evaluate later
 }
 
 void display_info () {
@@ -116,6 +121,13 @@ void display_exercise_image () {
     }
 }
 
+/* POST ROUND */
+
+void multi_round_session () {
+    if ((DETERMINE_VALUE("ROUNDS", FetchValueInt)) > 1) {
+        reverse_exercises();
+    }
+}
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
     PUSH_EXTENSION("post_compilation", &reverse_exercises),
@@ -123,7 +135,9 @@ std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_time),
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_reps),
     PUSH_EXTENSION("post_start_screen", &n_exercises),
-    PUSH_EXTENSION("post_exercise", &display_exercise_image)
+    PUSH_EXTENSION("post_start_screen", &display_variables),
+    PUSH_EXTENSION("post_exercise", &display_exercise_image),
+    PUSH_EXTENSION("round_end", &multi_round_session)
 };
 
 void compile_extensions (std::string group) {

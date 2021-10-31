@@ -114,11 +114,11 @@ int main (void) {
     compile_extensions("post_compilation");
     
     /* START SCREEN */
-
+    RESET_COLORS();
     compile_extensions("post_start_screen");
     RESET_COLORS();
-    //cout << endl;
-    (Exercises.begin())->Describe2();
+    cout << endl;
+    (Exercises.begin())->Describe2();       
     ON_KEY_CLS();
     
     /* MAIN LOOP */
@@ -127,11 +127,11 @@ int main (void) {
     reader.attatch(&Exercises);
     
     bool finished = false;
-    
-    FLOOP (int, ROUNDS, DETERMINE_VALUE("ROUNDS", FetchValueInt)) {
+
+    FLOOP (int, ROUNDS, (DETERMINE_VALUE("ROUNDS", FetchValueInt))) {
         current_exercise = reader.at(0);
         while (not finished) {
-
+            
             /* Begin Exercise Block */
             UTIL::espeak(current_exercise->name);
             compile_extensions("post_exercise");
@@ -186,8 +186,11 @@ int main (void) {
                 ON_KEY_CLS();
             }
         }
+        /* Round End Block */
+        finished = false;
+        compile_extensions("round_end");
     }
-
+    
     UTIL::espeak("Enjoy the feast!");
     
     cin.get();
