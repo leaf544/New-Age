@@ -50,7 +50,7 @@ void reverse_exercises () {
 }
 
 void handle_start () {
-    Exercises.erase(Exercises.begin(), Exercises.begin() + FetchValueInt("START"));
+    Exercises.erase(Exercises.begin(), Exercises.begin() + (DETERMINE_VALUE("START", FetchValueInt)));
 }
 
 /* POST START SCREEN EXTENSIONS */
