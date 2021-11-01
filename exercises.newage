@@ -12,7 +12,7 @@
  -Erector spinae: 3
  -Quads: 1
  
-%MAIN #INT ROUNDS 2 #INT RDELAY 2 #INT START 1
+%MAIN #INT ROUNDS 2 #INT RDELAY 2 #INT START 1 #INT REPS_OFFSET 2
 
 $Dead_Bug_Exercise                       1 F 15 20 3 // No shirt
 // Lower Abdomen (High)
