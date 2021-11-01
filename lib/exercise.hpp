@@ -3,6 +3,7 @@
 
 /* STD INCLUDES */
 #include <iostream>
+#include <algorithm>
 #include <string>
 
 using std::cout;
@@ -58,7 +59,9 @@ public:
     }
 
     void Describe2 () {
-        cout << this->name << ", " << this->freestyle << ", " << this->sets << ", " << this->reps << ", " << this->hold << ", " << this->ahold << endl;
+        std::string tmp = this->name;
+        std::replace(tmp.begin(), tmp.end(), '_', ' ');
+        cout << tmp << "  " << this->freestyle << "  " << this->sets << "  " << this->reps << "  " << this->hold << "  " << this->ahold << endl;
     }
     
     double CalculateTime () {

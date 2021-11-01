@@ -53,6 +53,23 @@ void handle_start () {
     Exercises.erase(Exercises.begin(), Exercises.begin() + (DETERMINE_VALUE("START", FetchValueInt)));
 }
 
+void on_mood () {
+    if (DETERMINE_VALUE("LOW_MOOD", FetchValueInt)) {
+        for (auto& exer : Exercises) {
+            exer.reps = 12;
+        }
+    }
+}
+
+void handle_offsets () {
+    for (auto& exer : Exercises) {
+        exer.sets += (DETERMINE_VALUE("SETS_OFFSET", FetchValueInt));
+        exer.reps += (DETERMINE_VALUE("REPS_OFFSET", FetchValueInt));
+        exer.hold += (DETERMINE_VALUE("HOLD_OFFSET", FetchValueInt));
+        exer.ahold += (DETERMINE_VALUE("AHOLD_OFFSET", FetchValueInt));
+    }
+}
+
 /* POST START SCREEN EXTENSIONS */
 
 void calculate_total_session_time () {
@@ -131,13 +148,19 @@ void multi_round_session () {
 }
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
+    //// POST COMPILATION ////
     PUSH_EXTENSION("post_compilation", &reverse_exercises),
     PUSH_EXTENSION("post_compilation", &handle_start),
+    PUSH_EXTENSION("post_compilation", &on_mood),
+    PUSH_EXTENSION("post_compilation", &handle_offsets),
+    //// POST START SCREEN ////
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_time),
     PUSH_EXTENSION("post_start_screen", &calculate_total_session_reps),
     PUSH_EXTENSION("post_start_screen", &n_exercises),
     PUSH_EXTENSION("post_start_screen", &display_variables),
+    //// POST EXERCISE ////
     PUSH_EXTENSION("post_exercise", &display_exercise_image),
+    //// POST ROUND END ////
     PUSH_EXTENSION("round_end", &multi_round_session)
 };
 
