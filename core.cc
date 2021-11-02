@@ -88,7 +88,7 @@ int main (void) {
         if (line[0] == EXERCISE_MARKER and category == Variables["CATEGORY"]) {
             values = UTIL::split_string(line.substr(1, line.length()), " ");
             Exercises.push_back(Exercise(values[0], values[2][0], CATOI(values[1]), CATOI(values[3]), CATOI(values[4]), CATOI(values[5])));
-             values.clear();
+            values.clear();
         }
     }
 
@@ -210,3 +210,4 @@ void bar(const char* label, int a, int b) {
     cout << label << sbar << endl;
     RESET_COLORS();
 }
+
