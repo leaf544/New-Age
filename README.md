@@ -1,3 +1,3 @@
 # New Age
 
-[!Alt text] (newage.png)
+![Alt text] (newage.png)
