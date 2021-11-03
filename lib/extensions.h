@@ -126,12 +126,12 @@ void display_info () {
 
 void display_exercise_image () {
     // This extension displays a visual representation of the current exercise at hand
-    if (FetchValueInt("DISPLAY") and not living_category.hasVariables) {
+    if (FetchValueInt("DISPLAY") and not living_category.hasVariables and current_exercise->tags.find("NO_DISPLAY") == std::string::npos) {
         std::string png (current_exercise->name);
         png.append(".png");
         std::string cmd = "start " + std::string(FILE_PNGS_PATH) + std::string(png) + " && timeout 4 && taskkill /IM Microsoft.Photos.exe /F";
         system(cmd.c_str());
-    } else if (living_category.hasVariables and living_category.FetchValueInt("DISPLAY")) {
+    } else if (living_category.hasVariables and living_category.FetchValueInt("DISPLAY") and current_exercise->tags.find("NO_DISPLAY") == std::string::npos) {
         std::string png (current_exercise->name);
         png.append(".png");
         std::string cmd = "start " + std::string(FILE_PNGS_PATH) + std::string(png) + " && timeout 4 && taskkill /IM Microsoft.Photos.exe /F";
@@ -142,7 +142,10 @@ void display_exercise_image () {
 /* POST ROUND */
 
 void multi_round_session () {
-    if ((DETERMINE_VALUE("ROUNDS", FetchValueInt)) > 1) {
+    if ((DETERMINE_VALUE("ROUNDS", FetchValueInt)) > 1 and current_exercise->tags.find("NO_NEG") == std::string::npos) {
+        for (auto& exer : Exercises) {
+            exer.reps -= (DETERMINE_VALUE("NEG", FetchValueInt));
+        }
         std::reverse(Exercises.begin(), Exercises.end());
     }
 }

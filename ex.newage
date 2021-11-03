@@ -12,17 +12,17 @@
  -Erector spinae: 3
  -Quads: 1
  
-%MAIN #INT ROUNDS 2 #INT RDELAY 1 #INT START 0 #BOOL LOW_MOOD 0 #BOOL DISPLAY 1
+%MAIN #INT ROUNDS 2 #INT RDELAY 1 #INT START 1 #BOOL DISPLAY 1 #INT NEG 3
 
-$Dead_Bug_Exercise                       1 F 15 20 3 // No shirt
+$Dead_Bug_Exercise                       1 F 15 20 3 
 // Lower Abdomen (High)
-$Glute_Bridge_Exercise                   1 F 15 20 3 // No pants
+$Glute_Bridge_Exercise                   1 F 15 20 3 NO_DISPLAY
 // Glutes (High), Erector spinae (Med), Hamstrings (Med), Hip flexors (?)
 $Squat_Exercise                           1 F 12 15 3
 // Glutes (?), Quads (Med), Hamstrings (High), Hip flexors (?)
 $Butterfly_Exercise                      1 T 12 20 3
 // Hip flexors (Med)
-$Superman_Exercise                       1 F 10 10 3 // No shirt
+$Superman_Exercise                       1 F 10 12 3
 // Erector spinae (High)
 
 %B #INT ROUNDS 2 #BOOL RDELAY 0 #BOOL REVERSE 0
@@ -34,14 +34,8 @@ $Wall_Psoas_Hold_Exercise                 1 F 15 25 3
 $Squat_Exercise                           1 T 100    20 3
 // Glutes (?), Quads (Med), Hamstrings (High), Hip flexors (?)
 
-%M
+%M #INT ROUNDS 2 #INT NEG 3
 
-$Nigga_Exercise   1 F 1 1 1 
-$Bitch_Exercise   1 F 1 1 1
-$Suicide_Exercise 1 F 1 1 1
-
-$Glute_Bridge_Exercise                   1 F 15 20 3 // No pants
-// Glutes (High), Erector spinae (Med), Hamstrings (Med), Hip flexors (?)
-
-$Single_Leg_Deadlift_Exercise            1 F 15 20 3 // No pants
-// Hamstrings (High), Erector spinae (Med)
+$Nigga_Exercise   1 F 4 1 1 
+$Bitch_Exercise   1 F 4 1 1
+$Suicide_Exercise 1 F 4 1 1
