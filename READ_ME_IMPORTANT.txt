@@ -13,7 +13,7 @@ Written by leaf544 aka grandma
 ** STEPS TO MAKE YOUR NEW-AGE UP AND RUNNING **
 
 - Adding 'eSpeak/command_line' into your PATH environment variable
-- Configuring our exercises.newage file
+- Configuring your ex.newage file
 
 
 

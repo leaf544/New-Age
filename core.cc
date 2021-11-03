@@ -1,3 +1,5 @@
+/* Written by leaf544 aka grandma */
+
 /* STD */
 #include <iostream>
 #include <vector>
@@ -109,6 +111,7 @@ int main (void) {
     compile_extensions("post_start_screen");
     RESET_COLORS();
     cout << endl;
+    FOREGROUND_COLOR(240);
     (Exercises.begin())->Describe2();       
     ON_KEY_CLS();
     
@@ -143,7 +146,7 @@ int main (void) {
                         bar("REPS: ", current_reps, current_exercise->reps);
                         current_reps++;
                         UTIL::espeak(std::to_string(current_reps), current_exercise->freestyle);
-                        SLEEP_TIME_FUNCTION(current_exercise->hold, if (GetAsyncKeyState(VK_RIGHT)){
+                        SLEEP_TIME_FUNCTION(current_exercise->hold, if (GetAsyncKeyState(0x39)){
                                 Log("Skipping..", 4);
                                 skipped = true;
                                 break;
@@ -153,7 +156,7 @@ int main (void) {
                     } else {
                         UTIL::espeak("Alternate", current_exercise->freestyle);
                         bar("REPS: ", current_reps, current_exercise->reps);
-                        SLEEP_TIME_FUNCTION(current_exercise->ahold, if (GetAsyncKeyState(VK_RIGHT)){
+                        SLEEP_TIME_FUNCTION(current_exercise->ahold, if (GetAsyncKeyState(0x39)){
                                 Log("Skipping..", 4);
                                 skipped = true;
                                 break;
