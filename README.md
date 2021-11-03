@@ -1,3 +1,3 @@
 # New Age
 
-![Alt text] (newage.png)
+![image](https://imgur.com/a/57GZCOE)
