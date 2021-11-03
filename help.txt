@@ -1,0 +1,99 @@
+1 -  THE ".NEWAGE" FILE
+
+Your .newage file is the heart and soul of your NewAge, it contains all the exercises
+you'll ever perform in a session with their respective settings.
+
+Your .newage file needs 3 primary ingredients to work properly, Specifiers, Categories and Exercises.
+
+Let's go over what those things are and how to set them up.
+
+1.1 - SPECIFIERS
+
+Specifiers are basically just values, they're values that have different purposes and are interepreted in a certain way by
+your NewAge, an example of these specifiers is the 'ROUNDS' specifier, this specifier holds the amount of rounds you'll be
+performing in an exercise session, here's how specifiers are generally defined.
+
+{Syntax}
+
+// Fig 1
+#[type of specifier] [name of specifier] [value of specifier]
+
+{Example}
+
+// Fig 2
+#INT    ROUNDS     3
+[type]  [name]     [value]
+
+Note: Specifiers should always be at the top of your .newage file
+
+1.2 - CATEGORIES
+
+Think of categories as boxes that store your exercises, they are absolutely essential and without them your NewAge wouldn't register
+any exercises at all.
+
+You need 2 things to instantiate a category, the category itself and the specifier that points to the category you want (this implies that you can have
+multiple categories for different types of exercises)
+
+Here's how to define a category:
+
+{Syntax}
+
+// Fig 3
+%[name of category]
+
+{Example}
+
+// Fig 4
+%MY_EXERCISES
+
+Now defining a category alone won't get NewAge to compile all the exercises in that category, you need to actually point to which
+category you would like to use. To do this you need to use the 'CATEGORY' specifier.
+
+========================================
+#CHAR CATEGORY   MY_EXERCISES
+
+%MY_EXERCISES
+========================================
+
+1.3 - EXERCISES
+
+An exercise in the NewAge conceptual universe is an object that has 6 or more values, those values are the following:
+
+1 - The name of the exercise
+2 - Whether or not the exercise is a freestyle exercise (True or False boolean)
+3 - The amount of sets for that exercise
+4 - The amount of reps for that exercise
+5 - The amount of seconds you have to hold that rep
+6 - The amount of seconds you're allowed to contract for (alternation)
+7+ - Additional and optional info that you'll rarely ever use
+
+{Syntax}
+
+// Fig 5
+
+$[name of exercise]    [sets] [freestyle] [reps] [hold] [alternate hold] [additional/optional info]
+
+{Example}
+
+$Glute_Bridge  1 F 15 10 3
+
+
+Note: Use underscores instead of spaces when writing the names of your exercises, otherwise your NewAge won't work as intended
+
+1.4 FINAL PICTURE
+
+Here's how a bare minimum .newage file looks like
+
+========================================
+#INT ROUNDS       1
+#CHAR CATEGORY    MY_EXERCISES
+
+%MY_EXERCISES
+
+$Glute_Bridge           1 F 15 10 3
+$Some_Other_Exercise    1 F 12 20 5
+========================================
+
+Now that you have the bare minimum set up, running your NewAge should get you something that looks like this: https://imgur.com/a/rzO9dQJ
+
+2. FUNCTIONALITY AND BEHAVIOUR ALTERATION WITH SPECIAL SPECIFIERS

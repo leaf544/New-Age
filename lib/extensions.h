@@ -107,15 +107,17 @@ void n_exercises () {
 void display_variables () {
     int colors = 0;
     RESET_COLORS(); // Just in case, evaluate later
-    cout << endl;
-    for (auto it = living_category.Variables.begin(); it != living_category.Variables.end(); it++) {
-        FOREGROUND_COLOR(colors);
-        if (it->second != "") {
-            cout << it->first << ": " << it->second << endl;    
+    if (living_category.Variables.size()) {
+        cout << endl;
+        for (auto it = living_category.Variables.begin(); it != living_category.Variables.end(); it++) {
+            FOREGROUND_COLOR(colors);
+            if (it->second != "") {
+                cout << it->first << ": " << it->second << endl;    
+            }
+            colors++;
         }
-        colors++;
+        RESET_COLORS(); // Just in case, evaluate later
     }
-    RESET_COLORS(); // Just in case, evaluate later
 }
 
 void display_info () {
