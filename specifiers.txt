@@ -1,0 +1,14 @@
+=ALL SPECIFIERS=
+
+#INT ROUNDS         1 // Amount of rounds
+#CHAR CATEGORY      MAIN // Category pointer
+#INT START          0 // Start from a specific point
+
+#INT RDELAY         0 // Delay before it starts the rep/contract proccess for the respective exercise
+#BOOL DISPLAY       0 // 1 = Show a visual representation of the respective exercise, 0 = Don't show
+#BOOL REVERSE       0 // 1 = Go through the exercises from bottom to top rather from top to bottom, is compatibale with START specifier
+
+#INT SETS_OFFSET    0 // All the sets of each and every single exercise in your selected category will be offseted by whatever value you put in here
+#INT REPS_OFFSET    0 // All the reps of each and every single exercise in your selected category will be offseted by whatever value you put in here
+#INT HOLD_OFFSET    0 // All the holds of each and every single exercise in your selected category will be offseted by whatever value you put in here
+#INT AHOLD_OFFSET   0 // All the aholds of each and every single exercise in your selected category will be offseted by whatever value you put in here

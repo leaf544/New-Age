@@ -143,14 +143,14 @@ void display_exercise_image () {
 
 /* POST ROUND */
 
-void multi_round_session () {
-    if ((DETERMINE_VALUE("ROUNDS", FetchValueInt)) > 1 and current_exercise->tags.find("NO_NEG") == std::string::npos) {
-        for (auto& exer : Exercises) {
-            exer.reps -= (DETERMINE_VALUE("NEG", FetchValueInt));
-        }
-        std::reverse(Exercises.begin(), Exercises.end());
-    }
-}
+// void multi_round_session () {
+//     if ((DETERMINE_VALUE("ROUNDS", FetchValueInt)) > 1 and current_exercise->tags.find("NO_NEG") == std::string::npos) {
+//         for (auto& exer : Exercises) {
+//             exer.reps -= (DETERMINE_VALUE("NEG", FetchValueInt));
+//         }
+//         std::reverse(Exercises.begin(), Exercises.end());
+//     }
+// }
 
 std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
     //// POST COMPILATION ////
@@ -164,9 +164,9 @@ std::vector<std::pair<std::string, void(*)(void)>> Extensions = {
     PUSH_EXTENSION("post_start_screen", &n_exercises),
     PUSH_EXTENSION("post_start_screen", &display_variables),
     //// POST EXERCISE ////
-    PUSH_EXTENSION("post_exercise", &display_exercise_image),
+    PUSH_EXTENSION("post_exercise", &display_exercise_image)
     //// POST ROUND END ////
-    PUSH_EXTENSION("round_end", &multi_round_session)
+    //PUSH_EXTENSION("round_end", &multi_round_session)
 };
 
 void compile_extensions (std::string group) {
