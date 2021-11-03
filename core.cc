@@ -120,8 +120,9 @@ int main (void) {
     FOREGROUND_COLOR(240);
     (Exercises.begin())->Describe2();
     RESET_COLORS();
+    cout << endl << "Press any key to start" << endl;
     ON_KEY_CLS();
-    
+
     /* MAIN LOOP */
     
     Reader reader;
