@@ -53,7 +53,7 @@ public:
 int main (void) {
     
     /* SETUP & PREREQUISITES */
-    
+
     STARTUP_SETUP();    
     
     /* COMPILE EXERCISES AND VARIABLES */
@@ -112,7 +112,8 @@ int main (void) {
     RESET_COLORS();
     cout << endl;
     FOREGROUND_COLOR(240);
-    (Exercises.begin())->Describe2();       
+    (Exercises.begin())->Describe2();
+    RESET_COLORS();
     ON_KEY_CLS();
     
     /* MAIN LOOP */
