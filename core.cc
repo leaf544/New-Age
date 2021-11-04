@@ -196,7 +196,7 @@ int main (void) {
         compile_extensions("round_end");
     }
     
-    UTIL::espeak("Exercise finished! Excellent job");
+    UTIL::espeak("Exercise finished, Excellent job");
     
     cin.get();
     return 0;
